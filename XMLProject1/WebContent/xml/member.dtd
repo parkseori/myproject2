@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XML의 태그와 변수 그리고 속성을 지정하는 언어
+	<!ELEMENT>->태그를 만들때
+		<member>//최상위태그>
+			<list no="a1">
+				<id>admin</id>
+				<pwd>1234</pwd>
+				<name first="홍">홍길동</name>
+				<hp>010-2222-2222</hp>
+				<from/>
+			</list>
+			<list no="a2">
+				<id>admin</id>
+				<name>홍길동</name>
+				<home>010-2222-2222</home>
+				<from/>
+			</list>
+		</member>
+	
+	<!ATTLIST>->속성을 지정할때
+	<!ENTITY nbsp " ">->변수를 호출할 때 ==>&nbsp;(공백)
+	<!ENTITY a "aa"> => &a;
+
+
+*태그 순서 => 순서대로 안써주면 에러가 난다
++ : 무조건 한번 이상 사용해야함
+* : 0~ 0번 이상 사용한다
+? : 0|1 => 써도 되고 안써도 된다
+| : 선택(th|td)*(+) //*(+): 이게 있으면 여러번 사용할 수 있다. +: 한번은 사용해야함  => 두개중에 한개를 선택해서 사용한다
+default : 반드시 한번만 사용한다
+ -->
+<!ELEMENT member (list+)> 
+<!ELEMENT list (id,pwd?,name,(hp|home),from)>
+<!ATTLIST list no ID #REQUIRED>
+<!--
+	ID, IDREF(FOREIGN KEY), NOTATION(일반문자열): 공백으 허용하지 않는다, CDATA(일반문자열) : 공백을 허용한다
+	==
+	UNIQUE(중복을 하면 안된다)
+	#REQUIRED : NOT NUL=>반드시 입력해야 한다
+	#IMPLIED : NULL =>널을 허용한다-> 써도 되고 안써도 된다
+	#RIXED : DEFAULT
+-->
+<!ELEMENT id (#PCDATA)><!-- id는 중복되면 안된다 -->
+<!ELEMENT pwd (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name first CDATA #IMPLIED>
+<!ELEMENT hp (#PCDATA)>
+<!ELEMENT home (#PCDATA)>
+<!ELEMENT from EMPTY>
+<!ATTLIST from nara CDATA #FIXED "한국">
+
+
+
+
+
+
+
+
+
+
+
+
+
